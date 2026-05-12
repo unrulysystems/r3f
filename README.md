@@ -11,6 +11,27 @@ This repository is a reserved public shell. It does not yet contain migrated pro
 - Test helper patterns for React Native, Three.js, R3F, and WebGPU/Dawn
 - Integration points that remain renderer-neutral where possible
 
+## Migration Handoff
+
+Sortessori is the reference app for validating native WebGPU/R3F compatibility, but this
+repo should receive reusable bridge code only after the app proves the physical iOS
+cutover. The current source of truth is
+`../sortessori/docs/unruly-systems-migration-plan.json`, backed by
+`../sortessori/docs/webgpu-cutover-audit.md`.
+
+Import production code here only after `../sortessori` has physical manual evidence for
+touch, VoiceOver, sensory feedback, and Expo GL rollback, and passes:
+
+```bash
+bun run ci
+bun run verify:webgpu-cutover
+bun run verify:package-boundaries
+```
+
+The first likely candidates are renderer-adapter patterns extracted from the Sortessori
+WebGPU route after the Drei/R3F module-boundary workaround is stable. Keep gameplay state,
+physics, and Sortessori-specific labels in their existing packages.
+
 ## Non-Goals
 
 - Forking R3F without a concrete compatibility requirement
