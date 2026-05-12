@@ -19,6 +19,8 @@ cutover. The current source of truth is
 `../sortessori/docs/unruly-systems-migration-plan.json`, backed by
 `../sortessori/docs/webgpu-cutover-audit.md`.
 
+Import gate: physical iOS cutover evidence verified and package-boundary checks green.
+
 Import production code here only after `../sortessori` has physical manual evidence for
 touch, VoiceOver, sensory feedback, and Expo GL rollback, and passes:
 
@@ -28,9 +30,9 @@ bun run verify:webgpu-cutover
 bun run verify:package-boundaries
 ```
 
-The first likely candidates are renderer-adapter patterns extracted from the Sortessori
-WebGPU route after the Drei/R3F module-boundary workaround is stable. Keep gameplay state,
-physics, and Sortessori-specific labels in their existing packages.
+The first eligible slice is renderer adapter patterns after Drei/R3F module-boundary
+workaround is stable. Keep gameplay state, physics, and Sortessori-specific labels in
+their existing packages.
 
 ## Non-Goals
 
